@@ -17,6 +17,7 @@ export class HomePage {
   events: EventResponse[] = [];
   subscriptions: Subscription[] = [];
   online$ = this.network.onlineChanges;
+  header_data: any;
 
   constructor(private updatesService: UpdatesService,
     private nav: NavController,
@@ -24,7 +25,9 @@ export class HomePage {
     private updater: SwUpdate,
     private toastController: ToastController,
     private alertController: AlertController,
-    private appRef: ApplicationRef) { }
+    private appRef: ApplicationRef) {
+    this.header_data = { ismenu: true, ishome: false, title: "Home" };
+  }
 
   ngOnInit(): void {
     this.subscriptions.push(this.updatesService.getAll().subscribe(e => this.events.push(e)));
@@ -37,14 +40,14 @@ export class HomePage {
   }
 
   getEvents(): EventResponse[] {
-    return this.events.sort((a,b) => a.event.created > b.event.created ? -1 : 1);
+    return this.events.sort((a, b) => a.event.created > b.event.created ? -1 : 1);
   }
 
   details(response: EventResponse) {
     this.nav.navigateForward(`/add-home/${response.event.id}`);
   }
 
-  initUpdater() { 
+  initUpdater() {
     // Allow the app to stabilize first, before starting polling for updates with `interval()`.
     // See https://angular.io/guide/service-worker-communications
     const updateInterval$ = interval(1000 * 60 * 1);  // 1 minute - Just for testing
@@ -57,36 +60,36 @@ export class HomePage {
       this.subscriptions.push(appStableInterval$.subscribe(() => this.checkForUpdate()));
       this.subscriptions.push(this.updater.available.subscribe(e => this.onUpdateAvailable(e)));
       this.subscriptions.push(this.updater.activated.subscribe((e) => this.onUpdateActivated(e)));
-    }  
+    }
   }
 
   async checkForUpdate() {
     if (this.updater.isEnabled) {
       console.log('Checking for updates...');
       await this.updater.checkForUpdate();
-    } 
+    }
   }
 
-  async onUpdateAvailable(event: UpdateAvailableEvent) { 
+  async onUpdateAvailable(event: UpdateAvailableEvent) {
     const updateMessage = event.available.appData['updateMessage'];
     console.log('A new version is available: ', updateMessage);
 
     const alert = await this.alertController.create({
       header: 'Update Available!',
-      message: 'A new version of the application is available. ' + 
-        `(Details: ${updateMessage}) ` + 
+      message: 'A new version of the application is available. ' +
+        `(Details: ${updateMessage}) ` +
         'Click OK to update now.',
       buttons: [
         {
-          text: 'Not Now', 
+          text: 'Not Now',
           role: 'cancel',
           cssClass: 'secondary',
-          handler: async () => { 
+          handler: async () => {
             await this.showToastMessage('Update deferred');
           }
         }, {
-          text: 'OK', 
-          handler: async () => { 
+          text: 'OK',
+          handler: async () => {
             await this.updater.activateUpdate();
             window.location.reload();
           }
@@ -96,14 +99,14 @@ export class HomePage {
     await alert.present();
   }
 
-  async onUpdateActivated(e: UpdateActivatedEvent) { 
+  async onUpdateActivated(e: UpdateActivatedEvent) {
     await this.showToastMessage('Application updating.');
   }
 
-  async showToastMessage(msg: string) { 
+  async showToastMessage(msg: string) {
     console.log(msg);
     const toast = await this.toastController.create({
-      header:'Alert',
+      header: 'Alert',
       message: msg,
       duration: 2000,
       keyboardClose: true,
