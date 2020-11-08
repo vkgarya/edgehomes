@@ -15,10 +15,10 @@ const routes: Routes = [
     path: 'add-home/:eventId',
     loadChildren: () => import('./add-home/add-home.module').then( m => m.AddHomePageModule)
   },
-  {
-    path: 'shared',
-    loadChildren: () => import('./shared/shared.module').then( m => m.SharedPageModule)
-  },
+  // {
+  //   path: 'shared',
+  //   loadChildren: () => import('./shared/shared.module').then( m => m.SharedPageModule)
+  // },
 ];
 
 @NgModule({

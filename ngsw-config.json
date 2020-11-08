@@ -2,7 +2,7 @@
     "$schema": "./node_modules/@angular/service-worker/config/schema.json",
     "index": "/index.html",
     "appData": {
-        "updateMessage": "Added pull to refresh1111."
+        "updateMessage": "Added pull to refresh."
     },
     "assetGroups": [{
         "name": "app",

@@ -17,7 +17,6 @@ export class HomePage {
   events: EventResponse[] = [];
   subscriptions: Subscription[] = [];
   online$ = this.network.onlineChanges;
-  header_data: any;
 
   constructor(private updatesService: UpdatesService,
     private nav: NavController,
@@ -26,7 +25,6 @@ export class HomePage {
     private toastController: ToastController,
     private alertController: AlertController,
     private appRef: ApplicationRef) {
-    this.header_data = { ismenu: true, ishome: false, title: "Home" };
   }
 
   ngOnInit(): void {
@@ -47,7 +45,7 @@ export class HomePage {
     this.nav.navigateForward(`/add-home/${response.event.id}`);
   }
 
-  initUpdater() {
+  initUpdater() { 
     // Allow the app to stabilize first, before starting polling for updates with `interval()`.
     // See https://angular.io/guide/service-worker-communications
     const updateInterval$ = interval(1000 * 60 * 1);  // 1 minute - Just for testing
@@ -60,7 +58,7 @@ export class HomePage {
       this.subscriptions.push(appStableInterval$.subscribe(() => this.checkForUpdate()));
       this.subscriptions.push(this.updater.available.subscribe(e => this.onUpdateAvailable(e)));
       this.subscriptions.push(this.updater.activated.subscribe((e) => this.onUpdateActivated(e)));
-    }
+    }  
   }
 
   async checkForUpdate() {
@@ -114,4 +112,20 @@ export class HomePage {
     });
     toast.present();
   }
+
+  async doRefresh(event) {
+    try {
+      const maxEvent = this.events
+        .reduce((prev, current)=> (prev.event.id > current.event.id) ? prev : current);
+      const maxEventId = +maxEvent.event.id + 1;
+
+      const response = await this.updatesService.getById(maxEventId).toPromise();
+      this.events.push(response);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      event.target.complete();
+    }
+  }
+
 }
