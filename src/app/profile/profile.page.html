@@ -1,0 +1,64 @@
+<ion-header [translucent]="true" class="ion-no-border">
+    <ion-card class="home-card">
+        <ion-item lines="none" class="item-background-color">
+            <ion-row class="center-align">
+                <img src="{{profile.avatar}}" class="profile-avatar">
+            </ion-row>
+        </ion-item>
+        <ion-item lines="none" class="item-background-color">
+            <ion-row class="center-align">
+                <ion-label>
+                    <p class="profile-name">{{profile.name}}</p>
+                    <p class="profile-title">{{profile.title}}</p>
+                    <p class="profile-code">{{profile.code}}</p>
+                </ion-label>
+            </ion-row>
+        </ion-item>
+        <ion-item lines="none" class="item-background-color">
+            <ion-row class="center-align">
+                <p class="profile-description">{{profile.description}}</p>
+            </ion-row>
+        </ion-item>
+        <ion-item lines="none" class="item-background-color">
+            <ion-row class="center-align">
+                <ion-button class="send" size="default" fill="clear">Send a Message</ion-button>
+            </ion-row>
+        </ion-item>
+        <ion-item lines="none" class="item-background-color">
+            <ion-row class="center-align">
+                <ion-button class="send" size="default" fill="clear">Send an Email</ion-button>
+            </ion-row>
+        </ion-item>
+        <ion-item lines="none" class="item-background-color">
+            <ion-row class="center-align">
+                <ion-button class="send" size="default" fill="clear">Phone Call</ion-button>
+            </ion-row>
+        </ion-item>
+    </ion-card>
+</ion-header>
+<ion-footer class="ion-no-border">
+    <ion-toolbar>
+        <ion-row class="footer-background">
+            <ion-col>
+                <ion-button size="large" fill="clear">
+                    <ion-img class="footer-img" src="./../../assets/icons/home.png"></ion-img>
+                </ion-button>
+            </ion-col>
+            <ion-col>
+                <ion-button size="large" fill="clear">
+                    <ion-img class="footer-img" src="./../../assets/icons/explore.png"></ion-img>
+                </ion-button>
+            </ion-col>
+            <ion-col>
+                <ion-button size="large" fill="clear">
+                    <ion-img class="footer-img" src="./../../assets/icons/profile.png"></ion-img>
+                </ion-button>
+            </ion-col>
+            <ion-col>
+                <ion-button size="large" fill="clear">
+                    <ion-img class="footer-img" src="./../../assets/icons/more.png"></ion-img>
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-footer>

@@ -3,14 +3,6 @@
     background: #fff;
 }
 
-.edit-home {
-    background-color: orange;
-    color: white;
-    border-radius: 30px;
-    padding: 0 20px;
-    text-transform: none;
-}
-
 .profile-header {
     font-size: 14px;
     color: #000;
@@ -25,20 +17,31 @@
     text-align: center;
 }
 
-.owner-avatar {
+.profile-avatar {
     margin: 10px auto;
     border-radius: 50%;
     height: 50%;
     width: 50%;
 }
 
-.owner-name {
-    font-size: 1.5em;
-    font-weight: bolder;
+.profile-description {
+    text-align: justify;
+    margin-bottom: 130px;
 }
 
-.owner-status {
+.profile-title {
     text-align: center;
+}
+
+.profile-name {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.profile-code {
+    text-align: center;
+    font-weight: bolder;
 }
 
 .item-background-color {
@@ -49,13 +52,12 @@
     margin: auto;
 }
 
-.width-90 {
-    width: 90%;
-}
-
-.segment {
+.send {
+    background-color: orange;
+    color: white;
+    border-radius: 30px;
+    padding: 0 20px;
     text-transform: none;
-    font-weight: bold;
 }
 
 // header

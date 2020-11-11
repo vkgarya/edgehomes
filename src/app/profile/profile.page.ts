@@ -9,16 +9,16 @@ import { UpdatesService } from '../services/updates.service';
 
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-profile',
+  templateUrl: './profile.page.html',
+  styleUrls: ['./profile.page.scss'],
 })
-export class HomePage {
+export class ProfilePage implements OnInit {
   events: EventResponse[] = [];
   subscriptions: Subscription[] = [];
   online$ = this.network.onlineChanges;
 
-  owner: any;
+  profile: any;
 
   searchTerm: string;
   constructor(private updatesService: UpdatesService,
@@ -37,17 +37,16 @@ export class HomePage {
 
 
 
-    this.owner =
+    this.profile =
     {
       avatar: './../../assets/dummy/dummy-image.jpg',
-      ownerName: 'Jones Residence',
-      status: 'Under Construction',
-      agentId: '1',
-      agentName: 'Jim McMohan',
-      designerId: '1',
-      designerName: 'Serena Williams',
-      builderId: '1',
-      builderName: 'John O. Builder'
+      name: 'John Q. Builder',
+      title: 'Construction Manager',
+      code: '901-111-1111x1111',
+      description: 'Home building is in my DNA. My grandpa was a home builder. My father owned a framing company, and I am honored to be able to carry on the family tradition as a Construction Manager for Edge Homes. When I am not busyt building homes, I enjoy hunting, fishing, or just sitting on a stump in the middle of the great outdoors.',
+      sendMessageNumber: '+1-1212121212',
+      sendEmailAddress: '+1-1212121212',
+      phoneCallNumber: '+1-1212121212',
     };
   }
 
@@ -160,3 +159,4 @@ export class HomePage {
   }
 
 }
+

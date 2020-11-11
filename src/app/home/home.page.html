@@ -1,38 +1,58 @@
 <ion-header [translucent]="true" class="ion-no-border">
-    <ion-card class="update-card">
+    <ion-card class="home-card">
         <ion-item lines="none" class="item-background-color">
-            <ion-avatar slot="start">
-                <img src="{{owner.avatar}}">
-            </ion-avatar>
-            <ion-label>
-                <h3><b>{{owner.ownerName}}</b></h3>
-                <p>{{owner.status}}</p>
-            </ion-label>
-            <ion-row>
+            <ion-row class="center-align">
+                <img src="{{owner.avatar}}" class="owner-avatar">
+            </ion-row>
+        </ion-item>
+        <ion-item lines="none" class="item-background-color">
+
+            <ion-row class="center-align">
+                <ion-label>
+                    <p class="owner-name">{{owner.ownerName}}</p>
+                    <p class="owner-status">{{owner.status}}</p>
+                </ion-label>
+            </ion-row>
+        </ion-item>
+        <ion-item lines="none" class="item-background-color">
+            <ion-row class="center-align width-90">
                 <ion-col>
-                    <ion-button size="large" fill="clear">
-                        <a>{{owner.agentName}}</a>
-                    </ion-button>
+                    <h3 class="profile-header">Agent</h3>
+                    <a class="profile-link">{{owner.agentName}}</a>
                 </ion-col>
                 <ion-col>
-                    <ion-button size="large" fill="clear">
-                        <a>{{owner.designerName}}</a>
-                    </ion-button>
+                    <h3 class="profile-header">Designer</h3>
+                    <a class="profile-link">{{owner.designerName}}</a>
                 </ion-col>
                 <ion-col>
-                    <ion-button size="large" fill="clear">
-                        <a>{{owner.builderName}}</a>
-                    </ion-button>
+                    <h3 class="profile-header">Builder</h3>
+                    <a class="profile-link">{{owner.builderName}}</a>
                 </ion-col>
             </ion-row>
         </ion-item>
-        <ion-item>
-            <ion-button class="edit-home" size="default" fill="clear" slot="end">Edit Home</ion-button>
+        <ion-item lines="none" class="item-background-color">
+            <ion-row class="center-align">
+                <ion-button class="edit-home" size="default" fill="clear">Edit Home</ion-button>
+            </ion-row>
         </ion-item>
     </ion-card>
 </ion-header>
 <ion-content [fullscreen]="true">
-    <ion-tabs>
+    <ion-segment (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="photos">
+            <ion-label class="segment">Photos</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="design">
+            <ion-label class="segment">Design</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="progress">
+            <ion-label class="segment">Progress</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="more">
+            <ion-label class="segment">More...</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+    <!-- <ion-tabs>
         <ion-tab-bar>
             <ion-tab-button tab="photos">
                 <ion-label>Photos</ion-label>
@@ -50,8 +70,7 @@
                 <ion-label>More...</ion-label>
             </ion-tab-button>
         </ion-tab-bar>
-
-    </ion-tabs>
+    </ion-tabs> -->
 </ion-content>
 <ion-footer class="ion-no-border">
     <ion-toolbar>

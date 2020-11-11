@@ -199,48 +199,44 @@
     margin-right: 0px;
 }
 
-.video-visto-busqueda {
-    padding: 0.1rem;
-    position: absolute;
-    top: 0.5rem;
-    right: 28rem;
-    // color: map-get($colors, primary);
-}
-
-ion-chip {
-    height: 2rem !important;
-    padding-right: 1rem;
-    i {
-        font-size: 2rem !important;
-        margin-right: -0.3rem !important;
-        padding-left: 1rem !important;
-        padding-top: 0.2rem !important;
-        padding-right: 1rem !important;
-        margin-top: -0.3rem !important;
-    }
-    .label-chip {
-        font-size: 1rem !important;
-        margin-top: -0.7rem !important;
-        padding-top: 0.15rem !important;
-    }
-}
-
-img {
-    width: 100%;
-    height: 100%;
-}
-
-.myCard {
-    position: relative;
-}
-
-.myOverlay {
-    width: 100%;
-    height: 60px;
-    position: absolute;
-    z-index: 99;
-    bottom: 0px;
-    opacity: 0.5;
-    background: #000;
-    color: #fff;
-}
+// .video-visto-busqueda {
+//     padding: 0.1rem;
+//     position: absolute;
+//     top: 0.5rem;
+//     right: 28rem;
+//     // color: map-get($colors, primary);
+// }
+// ion-chip {
+//     height: 2rem !important;
+//     padding-right: 1rem;
+//     i {
+//         font-size: 2rem !important;
+//         margin-right: -0.3rem !important;
+//         padding-left: 1rem !important;
+//         padding-top: 0.2rem !important;
+//         padding-right: 1rem !important;
+//         margin-top: -0.3rem !important;
+//     }
+//     .label-chip {
+//         font-size: 1rem !important;
+//         margin-top: -0.7rem !important;
+//         padding-top: 0.15rem !important;
+//     }
+// }
+// img {
+//     width: 100%;
+//     height: 100%;
+// }
+// .myCard {
+//     position: relative;
+// }
+// .myOverlay {
+//     width: 100%;
+//     height: 60px;
+//     position: absolute;
+//     z-index: 99;
+//     bottom: 0px;
+//     opacity: 0.5;
+//     background: #000;
+//     color: #fff;
+// }
