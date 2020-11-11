@@ -1,11 +1,20 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { HomePage } from './home/home.page';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'landing',
     pathMatch: 'full'
+  },
+  {
+    path: 'landing',
+    loadChildren: () => import('./landing/landing.module').then(m => m.LandingPageModule)
+  },
+  {
+    path: 'explore',
+    loadChildren: () => import('./explore/explore.module').then(m => m.ExplorePageModule)
   },
   {
     path: 'home',
@@ -13,12 +22,12 @@ const routes: Routes = [
   },
   {
     path: 'add-home',
-    loadChildren: () => import('./add-home/add-home.module').then( m => m.AddHomePageModule)
+    loadChildren: () => import('./add-home/add-home.module').then(m => m.AddHomePageModule)
   },
-  // {
-  //   path: 'shared',
-  //   loadChildren: () => import('./shared/shared.module').then( m => m.SharedPageModule)
-  // },
+  {
+    path: 'explore',
+    loadChildren: () => import('./explore/explore.module').then(m => m.ExplorePageModule)
+  }
 ];
 
 @NgModule({

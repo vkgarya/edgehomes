@@ -6,20 +6,21 @@ import { Network } from "@ngx-pwa/offline";
 import { SwUpdate, UpdateActivatedEvent, UpdateAvailableEvent } from '@angular/service-worker';
 import { EventResponse } from '../interfaces/interfaces';
 import { UpdatesService } from '../services/updates.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-landing',
+  templateUrl: './landing.page.html',
+  styleUrls: ['./landing.page.scss'],
 })
-export class HomePage {
+export class LandingPage implements OnInit {
   events: EventResponse[] = [];
   subscriptions: Subscription[] = [];
   online$ = this.network.onlineChanges;
 
-  owner:any;
-
+  menus: any;
+  updates: any;
   searchTerm:string;
   constructor(private updatesService: UpdatesService,
     private nav: NavController,
@@ -27,7 +28,9 @@ export class HomePage {
     private updater: SwUpdate,
     private toastController: ToastController,
     private alertController: AlertController,
-    private appRef: ApplicationRef) {
+    private appRef: ApplicationRef,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -35,20 +38,30 @@ export class HomePage {
 
     this.initUpdater();
 
-    
+    this.menus = [
+      {title: '', image:'./../../assets/dummy/add-home.png', link:'/add-home'},
+      {title: 'Jones Residence', image:'./../../assets/dummy/dummy-image.jpg', link:''},
+      {title: 'My Rental', image:'./../../assets/dummy/dummy-image.jpg', link:''},
+      {title: 'Townhome', image:'./../../assets/dummy/dummy-image.jpg', link:''},
+      {title: 'Other home', image:'./../../assets/dummy/dummy-image.jpg', link:''}
+    ];
 
-    this.owner =
+    this.updates = [
       {
         avatar : './../../assets/dummy/dummy-profile.png',
-        ownerName:'Jones Residence',
-        status:'Under Construction',
-        agentId:'1',
-        agentName:'Jim McMohan',
-        designerId:'1',
-        designerName:'Serena Williams',
-        builderId:'1',
-        builderName:'John O. Builder'
-      };
+        title:'Update on Jones Residence',
+        subtitle:'23 minutes ago from John Q.Builder',
+        image:'./../../assets/dummy/dummy-image.jpg',
+        descriptionHTML:'<b>CABINATES ARE IN!</b> I just wanted to get you an update on your home. Click the message icon to let me know if you have any questions!'
+      },
+      {
+        avatar : './../../assets/dummy/dummy-icon.png',
+        title:'Update on Jones Residence',
+        subtitle:'23 minutes ago from John Q.Builder',
+        image:'./../../assets/dummy/dummy-image.jpg',
+        descriptionHTML:'<b>CABINATES ARE IN!</b> I just wanted to get you an update on your home. Click the message icon to let me know if you have any questions!'
+      }
+    ];
   }
 
   ngOnDestroy(): void {
@@ -57,6 +70,13 @@ export class HomePage {
 
   setFilteredUpdates(): void{
 
+  }
+
+  navigateToHome(): void{
+    this.router.navigate(['landing']);
+  }
+  navigateToExplore(): void{
+    this.router.navigate(['explore']);
   }
 
   getEvents(): EventResponse[] {
@@ -151,3 +171,4 @@ export class HomePage {
   }
 
 }
+

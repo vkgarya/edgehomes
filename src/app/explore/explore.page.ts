@@ -1,3 +1,4 @@
+
 import { Component, OnInit, OnDestroy, ApplicationRef } from "@angular/core";
 import { Subscription, concat, interval } from 'rxjs';
 import { first } from 'rxjs/operators';
@@ -9,18 +10,19 @@ import { UpdatesService } from '../services/updates.service';
 
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-explore',
+  templateUrl: './explore.page.html',
+  styleUrls: ['./explore.page.scss'],
 })
-export class HomePage {
+export class ExplorePage implements OnInit {
   events: EventResponse[] = [];
   subscriptions: Subscription[] = [];
   online$ = this.network.onlineChanges;
 
-  owner:any;
-
-  searchTerm:string;
+  menus: any;
+  floors: any;
+  grid: Array<Array<string>>;
+  searchTerm: string;
   constructor(private updatesService: UpdatesService,
     private nav: NavController,
     private network: Network,
@@ -35,27 +37,78 @@ export class HomePage {
 
     this.initUpdater();
 
-    
+    this.menus = [
+      { title: 'FLOOR PLANS', image: './../../assets/dummy/add-home.png', link: '/add-home' },
+      { title: 'COMMUNITIES', image: './../../assets/dummy/dummy-image.jpg', link: '' },
+      { title: 'QUICK MOVE-INS', image: './../../assets/dummy/dummy-image.jpg', link: '' },
+      { title: 'GALLARY', image: './../../assets/dummy/dummy-image.jpg', link: '' }
+    ];
 
-    this.owner =
+    this.floors = [
       {
-        avatar : './../../assets/dummy/dummy-profile.png',
-        ownerName:'Jones Residence',
-        status:'Under Construction',
-        agentId:'1',
-        agentName:'Jim McMohan',
-        designerId:'1',
-        designerName:'Serena Williams',
-        builderId:'1',
-        builderName:'John O. Builder'
-      };
+        homeImage: './../../assets/dummy/dummy-image.jpg',
+        homeOwner: 'Tessa'
+      },
+      {
+        homeImage: './../../assets/dummy/dummy-image.jpg',
+        homeOwner: 'Quincy'
+      },
+      {
+        homeImage: './../../assets/dummy/dummy-image.jpg',
+        homeOwner: 'Morgan'
+      },
+      {
+        homeImage: './../../assets/dummy/dummy-image.jpg',
+        homeOwner: 'Emily'
+      },
+      {
+        homeImage: './../../assets/dummy/dummy-image.jpg',
+        homeOwner: 'John'
+      },
+      {
+        homeImage: './../../assets/dummy/dummy-image.jpg',
+        homeOwner: 'Tom'
+      },
+      {
+        homeImage: './../../assets/dummy/dummy-image.jpg',
+        homeOwner: 'Charlie'
+      },
+      {
+        homeImage: './../../assets/dummy/dummy-image.jpg',
+        homeOwner: 'Adam'
+      },
+    ];
+
+    this.grid = Array(Math.ceil(this.floors.length / 2));
+
+    this.ionViewLoaded();
+  }
+
+  ionViewLoaded() {
+    
+    let rowNum = 0;
+    
+    for (let i = 0; i < this.floors.length; i+=2) {
+      
+      this.grid[rowNum] = Array(2);
+
+      if (this.floors[i]) {
+        this.grid[rowNum][0] = this.floors[i]
+      }
+      if (this.floors[i+1]) {
+        this.grid[rowNum][1] = this.floors[i+1]
+      }
+    
+      rowNum++;
+    }
+      
   }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-  setFilteredUpdates(): void{
+  setFilteredUpdates(): void {
 
   }
 

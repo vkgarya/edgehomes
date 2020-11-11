@@ -1,68 +1,57 @@
 <ion-header [translucent]="true" class="ion-no-border">
-    <ion-toolbar>
-        <ion-img id="header-img" src="./../../assets/icons/designed-for-life-logo.png" alt="Edge Homes"></ion-img>
-        <ion-buttons slot="end">
-            <div *ngIf="online$ | async; else offline"></div>
-            <ng-template #offline>
-                <ion-chip color="warning">
-                    <ion-label>Offline</ion-label>
-                </ion-chip>
-            </ng-template>
-        </ion-buttons>
-
-        <section class="previews">
-            <div class="container-fluid">
-                <div class="w-100">
-                    <div class="previews-container">
-                        <div *ngFor="let item of menus">
-                            <a class="menu-link" [routerLink]="[item.link]">
-                                <div class="flex-circle">
-                                    <ion-img src="{{item.image}}"></ion-img>
-                                </div>
-                                <ion-label class="center-align-text">{{item.title}}</ion-label>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="home-search-bar">
-                <ion-item lines="none">
-                    <span><b>Updates</b></span>
-                    <ion-searchbar class="home-search" [(ngModel)]="searchTerm" (ionInput)="setFilteredUpdates()" [showCancelButton]="true"></ion-searchbar>
-                </ion-item>
-            </div>
-        </section>
-    </ion-toolbar>
-</ion-header>
-<ion-content [fullscreen]="true">
-    <ion-refresher (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
-    <div>
-        <ion-grid>
+    <ion-card class="update-card">
+        <ion-item lines="none" class="item-background-color">
+            <ion-avatar slot="start">
+                <img src="{{owner.avatar}}">
+            </ion-avatar>
+            <ion-label>
+                <h3><b>{{owner.ownerName}}</b></h3>
+                <p>{{owner.status}}</p>
+            </ion-label>
             <ion-row>
-                <ion-col *ngFor="let e of updates" size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
-                    <ion-card class="update-card">
-                        <ion-item lines="none" class="item-background-color">
-                            <ion-avatar slot="start">
-                                <img src="{{e.avatar}}">
-                            </ion-avatar>
-                            <ion-label>
-                                <h3><b>{{e.title}}</b></h3>
-                                <p>{{e.subtitle}}</p>
-                            </ion-label>
-                        </ion-item>
-                        <ion-card-content>
-                            <ion-img class="update-image" src="{{e.image}}" alt=""></ion-img>
-                        </ion-card-content>
-                        <ion-card-content>
-                            <span [innerHTML]="e.descriptionHTML"></span>
-                        </ion-card-content>
-                    </ion-card>
+                <ion-col>
+                    <ion-button size="large" fill="clear">
+                        <a>{{owner.agentName}}</a>
+                    </ion-button>
+                </ion-col>
+                <ion-col>
+                    <ion-button size="large" fill="clear">
+                        <a>{{owner.designerName}}</a>
+                    </ion-button>
+                </ion-col>
+                <ion-col>
+                    <ion-button size="large" fill="clear">
+                        <a>{{owner.builderName}}</a>
+                    </ion-button>
                 </ion-col>
             </ion-row>
-        </ion-grid>
-    </div>
+        </ion-item>
+        <ion-item>
+            <ion-button class="edit-home" size="default" fill="clear" slot="end">Edit Home</ion-button>
+        </ion-item>
+    </ion-card>
+</ion-header>
+<ion-content [fullscreen]="true">
+    <ion-tabs>
+        <ion-tab-bar>
+            <ion-tab-button tab="photos">
+                <ion-label>Photos</ion-label>
+            </ion-tab-button>
+
+            <ion-tab-button tab="design">
+                <ion-label>Design</ion-label>
+            </ion-tab-button>
+
+            <ion-tab-button tab="progress">
+                <ion-label>Progress</ion-label>
+            </ion-tab-button>
+
+            <ion-tab-button tab="more">
+                <ion-label>More...</ion-label>
+            </ion-tab-button>
+        </ion-tab-bar>
+
+    </ion-tabs>
 </ion-content>
 <ion-footer class="ion-no-border">
     <ion-toolbar>
@@ -90,5 +79,3 @@
         </ion-row>
     </ion-toolbar>
 </ion-footer>
-
-<!-- https://www.positronx.io/ionic-card-component-example/ -->
