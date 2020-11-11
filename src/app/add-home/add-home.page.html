@@ -1,9 +1,6 @@
-<ion-header>
+<ion-header [translucent]="true" class="ion-no-border">
     <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
-        </ion-buttons>
-        <ion-title>{{event?.dialed}} Call @ {{event?.created | date:'short'}}</ion-title>
+        <ion-img id="header-img" src="./../../assets/icons/designed-for-life-logo.png" alt="Edge Homes"></ion-img>
         <ion-buttons slot="end">
             <div *ngIf="online$ | async; else offline"></div>
             <ng-template #offline>
@@ -14,59 +11,51 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-
-<ion-content class="ion-padding">
-    <h1>Add Home</h1>
-    <ion-grid>
-        <ion-row>
-            <ion-col size-xs="12" size-sm="6" size-md="4" size-lg="3" size-xl="2">
-                <ion-item>
-                    <ion-label position="floating">Caller First Name</ion-label>
-                    <ion-input readonly value="{{event?.caller.firstName}}"></ion-input>
-                </ion-item>
+<ion-content [fullscreen]="true">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <div id="container">
+        <strong>
+            <h1>Add an Existing Home</h1>
+        </strong>
+        <p>
+            Tap the camera to scan the QR code. The QR code can be found on the electrical panel of homes completed in 2021 or later.
+        </p>
+        <div>
+            <span>
+                or enter your access code here:
+            </span>
+            <ion-item lines="none">
+                <ion-input type="text" class="access-code padding" placeholder=""></ion-input>
+                <ion-button class="access-code-go" size="default" fill="clear" slot="end">Go</ion-button>
+            </ion-item>
+        </div>
+    </div>
+</ion-content>
+<ion-footer class="ion-no-border">
+    <ion-toolbar>
+        <ion-row class="footer-background">
+            <ion-col>
+                <ion-button size="large" fill="clear">
+                    <ion-img class="footer-img" src="./../../assets/icons/home.png"></ion-img>
+                </ion-button>
             </ion-col>
-            <ion-col size-xs="12" size-sm="6" size-md="4" size-lg="3" size-xl="2">
-                <ion-item>
-                    <ion-label position="floating">Caller Last Name</ion-label>
-                    <ion-input readonly value="{{event?.caller.lastName}}"></ion-input>
-                </ion-item>
+            <ion-col>
+                <ion-button size="large" fill="clear">
+                    <ion-img class="footer-img" src="./../../assets/icons/explore.png"></ion-img>
+                </ion-button>
             </ion-col>
-            <ion-col size-xs="12" size-sm="6" size-md="4" size-lg="3" size-xl="2">
-                <ion-item>
-                    <ion-label position="floating">Caller Phone</ion-label>
-                    <ion-input readonly value="{{event?.caller.phone}}"></ion-input>
-                </ion-item>
+            <ion-col>
+                <ion-button size="large" fill="clear">
+                    <ion-img class="footer-img" src="./../../assets/icons/profile.png"></ion-img>
+                </ion-button>
             </ion-col>
-            <ion-col size-xs="12" size-sm="6" size-md="4" size-lg="3" size-xl="2">
-                <ion-item>
-                    <ion-label position="floating">Address</ion-label>
-                    <ion-input readonly value="{{event?.caller.address.street1}}"></ion-input>
-                </ion-item>
-            </ion-col>
-            <ion-col size-xs="12" size-sm="6" size-md="4" size-lg="3" size-xl="2">
-                <ion-item *ngIf="event?.caller.address.street2">
-                    <ion-label position="floating">Address (cont)</ion-label>
-                    <ion-input readonly value="{{event?.caller.address.street2}}"></ion-input>
-                </ion-item>
-            </ion-col>
-            <ion-col size-xs="12" size-sm="6" size-md="4" size-lg="3" size-xl="2">
-                <ion-item>
-                    <ion-label position="floating">City/Town</ion-label>
-                    <ion-input readonly value="{{event?.caller.address.city}}"></ion-input>
-                </ion-item>
-            </ion-col>
-            <ion-col size-xs="12" size-sm="6" size-md="4" size-lg="3" size-xl="2">
-                <ion-item>
-                    <ion-label position="floating">State</ion-label>
-                    <ion-input readonly value="{{event?.caller.address.state}}"></ion-input>
-                </ion-item>
-            </ion-col>
-            <ion-col size-xs="12" size-sm="6" size-md="4" size-lg="3" size-xl="2">
-                <ion-item>
-                    <ion-label position="floating">Postal Code</ion-label>
-                    <ion-input readonly value="{{event?.caller.address.zip}}"></ion-input>
-                </ion-item>
+            <ion-col>
+                <ion-button size="large" fill="clear">
+                    <ion-img class="footer-img" src="./../../assets/icons/more.png"></ion-img>
+                </ion-button>
             </ion-col>
         </ion-row>
-    </ion-grid>
-</ion-content>
+    </ion-toolbar>
+</ion-footer>

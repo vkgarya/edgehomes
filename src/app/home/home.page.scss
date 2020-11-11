@@ -1,57 +1,48 @@
-#container {
-    position: absolute;
-    left: 10%;
-    right: 10%;
-    // top: 30%;
-    // transform: translateY(-50%);
+.menu-link {
+    text-decoration: none;
+    color: #424242;
+    font-size: 12px;
 }
 
-#container strong {
-    font-size: 20px;
-    line-height: 26px;
+.center-align-text {
+    display: flex;
+    justify-content: center;
 }
 
-#container strong h1 {
-    font-weight: bold;
+.home-search-bar {
+    margin-top: 40px;
 }
 
-#container p {
-    font-size: 16px;
-    line-height: 22px;
-    color: #8c8c8c;
-    margin: 2em 0;
-    text-align: center;
+.home-search-bar span {
+    margin-right: 20px;
 }
 
-#container div {
-    margin-top: 130px;
+.home-search {
+    border-radius: 10px !important;
+    input {
+        border-radius: 15px;
+        background-color: #ffffff;
+    }
 }
 
-#container span {
-    font-size: 16px;
-    line-height: 22px;
-    color: #8c8c8c;
-    margin: 3em 0;
-    text-align: center;
-    padding: 3em 2em;
-}
-
-.access-code {
+.update-card {
     background-color: #ffffff;
-    border: 1px solid grey;
-    height: 40px;
+    border-radius: 10px;
 }
 
-.access-code-go {
-    background-color: orange;
-    color: white;
-    border-radius: 30px;
-    margin-left: 7px;
+.item-background-color {
+    --ion-item-background: #ffffff;
 }
 
-// ion-item {
-//     --highlight-color-focused: none;
-// }
+.searchbar-input {
+    background-color: #ffffff;
+}
+
+.update-image {
+    border-radius: 10px !important;
+    overflow: hidden;
+}
+
 // header
 #header-img {
     margin: auto;
@@ -69,4 +60,141 @@
 .footer-img {
     height: 50%;
     width: 50%;
+}
+
+
+/* RESPONSIVE CSS
+  -------------------------------------------------- */
+
+@media screen and (max-width: 768px) {
+    .flex-container {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+}
+
+.flex-container .flex-box {
+    display: inline-block;
+    margin-right: 15px;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 5px;
+    background-color: #f1f1f1;
+    border: solid 1px #f1b600;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.flex-container .flex-box img {
+    width: 150px;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.flex-container .flex-box .icon-heart {
+    position: absolute;
+    bottom: 0;
+    left: 5px;
+    cursor: pointer;
+}
+
+.flex-container .flex-box .icon-share {
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+    cursor: pointer;
+}
+
+.flex-container .flex-box.videos {
+    height: 200px !important;
+}
+
+.flex-container .flex-box:last-child {
+    margin-right: 0px;
+}
+
+.previews {
+    padding: 15px 0;
+    margin-bottom: 30px;
+}
+
+@media screen and (max-width: 768px) {
+    .previews .previews-container {
+        display: -webkit-box !important;
+        display: -ms-flexbox !important;
+        display: flex !important;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+}
+
+.previews .previews-container {
+    display: -ms-grid;
+    display: grid;
+    grid-gap: 1em;
+    -ms-grid-columns: minmax(170px, 1fr) [auto-fit];
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+@media screen and (max-width: 416px) {
+    .previews .previews-container {
+        -ms-grid-columns: none;
+        grid-template-columns: none;
+        display: inline-block;
+    }
+}
+
+.previews .previews-container .flex-circle {
+    background: transparent;
+    height: 85px;
+    width: 85px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 50%;
+    border: solid 2px #f1b600;
+    overflow: hidden;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+}
+
+@media screen and (max-width: 416px) {
+    .previews .previews-container .flex-circle {
+        height: 85px;
+        width: 85px;
+        display: inline-block;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+}
+
+@media screen and (max-width: 370px) {
+    .previews .previews-container .flex-circle {
+        height: 85px;
+        width: 85px;
+        display: inline-block;
+        margin-right: 10px;
+    }
+}
+
+.previews .previews-container .flex-circle img {
+    -o-object-fit: cover;
+    object-fit: cover;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.previews .previews-container .flex-circle:last-child {
+    margin-right: 0px;
 }

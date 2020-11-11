@@ -9,28 +9,59 @@
                 </ion-chip>
             </ng-template>
         </ion-buttons>
+
+        <section class="previews">
+            <div class="container-fluid">
+                <div class="w-100">
+                    <div class="previews-container">
+                        <div *ngFor="let item of menus">
+                            <a class="menu-link" [routerLink]="[item.link]">
+                                <div class="flex-circle">
+                                    <ion-img src="{{item.image}}"></ion-img>
+                                </div>
+                                <ion-label class="center-align-text">{{item.title}}</ion-label>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="home-search-bar">
+                <ion-item lines="none">
+                    <span><b>Updates</b></span>
+                    <ion-searchbar class="home-search" [(ngModel)]="searchTerm" (ionInput)="setFilteredUpdates()" [showCancelButton]="true"></ion-searchbar>
+                </ion-item>
+            </div>
+        </section>
     </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
     <ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <div id="container">
-        <strong>
-            <h1>Add an Existing Home</h1>
-        </strong>
-        <p>
-            Tap the camera to scan the QR code. The QR code can be found on the electrical panel of homes completed in 2021 or later.
-        </p>
-        <div>
-            <span>
-                or enter your access code here:
-            </span>
-            <ion-item lines="none">
-                <ion-input type="text" class="access-code padding" placeholder=""></ion-input>
-                <ion-button class="access-code-go" size="default" fill="clear" slot="end">Go</ion-button>
-            </ion-item>
-        </div>
+    <div>
+        <ion-grid>
+            <ion-row>
+                <ion-col *ngFor="let e of updates" size-xs="12" size-sm="12" size-md="12" size-lg="12" size-xl="12">
+                    <ion-card class="update-card">
+                        <ion-item lines="none" class="item-background-color">
+                            <ion-avatar slot="start">
+                                <img src="{{e.avatar}}">
+                            </ion-avatar>
+                            <ion-label>
+                                <h3><b>{{e.title}}</b></h3>
+                                <p>{{e.subtitle}}</p>
+                            </ion-label>
+                        </ion-item>
+                        <ion-card-content>
+                            <ion-img class="update-image" src="{{e.image}}" alt=""></ion-img>
+                        </ion-card-content>
+                        <ion-card-content>
+                            <span [innerHTML]="e.descriptionHTML"></span>
+                        </ion-card-content>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
     </div>
 </ion-content>
 <ion-footer class="ion-no-border">
@@ -59,3 +90,5 @@
         </ion-row>
     </ion-toolbar>
 </ion-footer>
+
+<!-- https://www.positronx.io/ionic-card-component-example/ -->

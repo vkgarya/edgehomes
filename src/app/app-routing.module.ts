@@ -12,7 +12,7 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
-    path: 'add-home/:eventId',
+    path: 'add-home',
     loadChildren: () => import('./add-home/add-home.module').then( m => m.AddHomePageModule)
   },
   // {

@@ -18,6 +18,9 @@ export class HomePage {
   subscriptions: Subscription[] = [];
   online$ = this.network.onlineChanges;
 
+  menus: any;
+  updates: any;
+  searchTerm:string;
   constructor(private updatesService: UpdatesService,
     private nav: NavController,
     private network: Network,
@@ -31,10 +34,39 @@ export class HomePage {
     this.subscriptions.push(this.updatesService.getAll().subscribe(e => this.events.push(e)));
 
     this.initUpdater();
+
+    this.menus = [
+      {title: '', image:'./../../assets/dummy/add-home.png', link:'/add-home'},
+      {title: 'Jones Residence', image:'./../../assets/dummy/dummy-image.jpg', link:''},
+      {title: 'My Rental', image:'./../../assets/dummy/dummy-image.jpg', link:''},
+      {title: 'Townhome', image:'./../../assets/dummy/dummy-image.jpg', link:''},
+      {title: 'Other home', image:'./../../assets/dummy/dummy-image.jpg', link:''}
+    ];
+
+    this.updates = [
+      {
+        avatar : './../../assets/dummy/dummy-profile.png',
+        title:'Update on Jones Residence',
+        subtitle:'23 minutes ago from John Q.Builder',
+        image:'./../../assets/dummy/dummy-image.jpg',
+        descriptionHTML:'<b>CABINATES ARE IN!</b> I just wanted to get you an update on your home. Click the message icon to let me know if you have any questions!'
+      },
+      {
+        avatar : './../../assets/dummy/dummy-icon.png',
+        title:'Update on Jones Residence',
+        subtitle:'23 minutes ago from John Q.Builder',
+        image:'./../../assets/dummy/dummy-image.jpg',
+        descriptionHTML:'<b>CABINATES ARE IN!</b> I just wanted to get you an update on your home. Click the message icon to let me know if you have any questions!'
+      }
+    ];
   }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
+  setFilteredUpdates(): void{
+
   }
 
   getEvents(): EventResponse[] {
@@ -45,7 +77,7 @@ export class HomePage {
     this.nav.navigateForward(`/add-home/${response.event.id}`);
   }
 
-  initUpdater() { 
+  initUpdater() {
     // Allow the app to stabilize first, before starting polling for updates with `interval()`.
     // See https://angular.io/guide/service-worker-communications
     const updateInterval$ = interval(1000 * 60 * 1);  // 1 minute - Just for testing
@@ -58,7 +90,7 @@ export class HomePage {
       this.subscriptions.push(appStableInterval$.subscribe(() => this.checkForUpdate()));
       this.subscriptions.push(this.updater.available.subscribe(e => this.onUpdateAvailable(e)));
       this.subscriptions.push(this.updater.activated.subscribe((e) => this.onUpdateActivated(e)));
-    }  
+    }
   }
 
   async checkForUpdate() {
@@ -116,7 +148,7 @@ export class HomePage {
   async doRefresh(event) {
     try {
       const maxEvent = this.events
-        .reduce((prev, current)=> (prev.event.id > current.event.id) ? prev : current);
+        .reduce((prev, current) => (prev.event.id > current.event.id) ? prev : current);
       const maxEventId = +maxEvent.event.id + 1;
 
       const response = await this.updatesService.getById(maxEventId).toPromise();
