@@ -21,7 +21,7 @@ export class LandingPage implements OnInit {
 
   menus: any;
   updates: any;
-  searchTerm:string;
+  searchTerm: string;
   constructor(private updatesService: UpdatesService,
     private nav: NavController,
     private network: Network,
@@ -29,8 +29,7 @@ export class LandingPage implements OnInit {
     private toastController: ToastController,
     private alertController: AlertController,
     private appRef: ApplicationRef,
-    private router: Router,
-    private activatedRoute: ActivatedRoute) {
+    private router: Router) {
   }
 
   ngOnInit(): void {
@@ -39,27 +38,27 @@ export class LandingPage implements OnInit {
     this.initUpdater();
 
     this.menus = [
-      {title: '', image:'./../../assets/dummy/add-home.png', link:'/add-home'},
-      {title: 'Jones Residence', image:'./../../assets/dummy/dummy-image.jpg', link:''},
-      {title: 'My Rental', image:'./../../assets/dummy/dummy-image.jpg', link:''},
-      {title: 'Townhome', image:'./../../assets/dummy/dummy-image.jpg', link:''},
-      {title: 'Other home', image:'./../../assets/dummy/dummy-image.jpg', link:''}
+      { title: '', image: './../../assets/dummy/add-home.png', link: '/add-home' },
+      { title: 'Jones Residence', image: './../../assets/dummy/dummy-image.jpg', link: '' },
+      { title: 'My Rental', image: './../../assets/dummy/dummy-image.jpg', link: '' },
+      { title: 'Townhome', image: './../../assets/dummy/dummy-image.jpg', link: '' },
+      { title: 'Other home', image: './../../assets/dummy/dummy-image.jpg', link: '' }
     ];
 
     this.updates = [
       {
-        avatar : './../../assets/dummy/dummy-profile.png',
-        title:'Update on Jones Residence',
-        subtitle:'23 minutes ago from John Q.Builder',
-        image:'./../../assets/dummy/dummy-image.jpg',
-        descriptionHTML:'<b>CABINATES ARE IN!</b> I just wanted to get you an update on your home. Click the message icon to let me know if you have any questions!'
+        avatar: './../../assets/dummy/dummy-profile.png',
+        title: 'Update on Jones Residence',
+        subtitle: '23 minutes ago from John Q.Builder',
+        image: './../../assets/dummy/dummy-image.jpg',
+        descriptionHTML: '<b>CABINATES ARE IN!</b> I just wanted to get you an update on your home. Click the message icon to let me know if you have any questions!'
       },
       {
-        avatar : './../../assets/dummy/dummy-icon.png',
-        title:'Update on Jones Residence',
-        subtitle:'23 minutes ago from John Q.Builder',
-        image:'./../../assets/dummy/dummy-image.jpg',
-        descriptionHTML:'<b>CABINATES ARE IN!</b> I just wanted to get you an update on your home. Click the message icon to let me know if you have any questions!'
+        avatar: './../../assets/dummy/dummy-icon.png',
+        title: 'Update on Jones Residence',
+        subtitle: '23 minutes ago from John Q.Builder',
+        image: './../../assets/dummy/dummy-image.jpg',
+        descriptionHTML: '<b>CABINATES ARE IN!</b> I just wanted to get you an update on your home. Click the message icon to let me know if you have any questions!'
       }
     ];
   }
@@ -68,15 +67,8 @@ export class LandingPage implements OnInit {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-  setFilteredUpdates(): void{
+  setFilteredUpdates(): void {
 
-  }
-
-  navigateToHome(): void{
-    this.router.navigate(['landing']);
-  }
-  navigateToExplore(): void{
-    this.router.navigate(['explore']);
   }
 
   getEvents(): EventResponse[] {
@@ -168,6 +160,19 @@ export class LandingPage implements OnInit {
     } finally {
       event.target.complete();
     }
+  }
+
+  navigateToHome(): void {
+    this.router.navigate(['landing']);
+  }
+  navigateToExplore(): void {
+    this.router.navigate(['explore']);
+  }
+  navigateToSelf(): void{
+    this.router.navigate(['self']);
+  }
+  navigateToFooterMore(): void{
+    this.router.navigate(['footer-more']);
   }
 
 }

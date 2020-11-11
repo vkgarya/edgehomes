@@ -7,3 +7,30 @@
 <ion-content>
 
 </ion-content>
+
+<ion-footer class="ion-no-border">
+    <ion-toolbar>
+        <ion-row class="footer-background">
+            <ion-col>
+                <ion-button size="large" fill="clear" (click)="navigateToHome()">
+                    <ion-img class="footer-img" src="./../../assets/icons/home.png"></ion-img>
+                </ion-button>
+            </ion-col>
+            <ion-col>
+                <ion-button size="large" fill="clear" (click)="navigateToExplore()">
+                    <ion-img class="footer-img" src="./../../assets/icons/explore.png"></ion-img>
+                </ion-button>
+            </ion-col>
+            <ion-col>
+                <ion-button size="large" fill="clear" (click)="navigateToSelf()">
+                    <ion-img class="footer-img" src="./../../assets/icons/profile.png"></ion-img>
+                </ion-button>
+            </ion-col>
+            <ion-col>
+                <ion-button size="large" fill="clear" (click)="navigateToFooterMore()">
+                    <ion-img class="footer-img" src="./../../assets/icons/more.png"></ion-img>
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-footer>

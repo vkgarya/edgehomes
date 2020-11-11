@@ -6,6 +6,7 @@ import { Network } from "@ngx-pwa/offline";
 import { SwUpdate, UpdateActivatedEvent, UpdateAvailableEvent } from '@angular/service-worker';
 import { EventResponse } from '../interfaces/interfaces';
 import { UpdatesService } from '../services/updates.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-home',
@@ -24,7 +25,8 @@ export class AddHomePage implements OnInit {
     private updater: SwUpdate,
     private toastController: ToastController,
     private alertController: AlertController,
-    private appRef: ApplicationRef) {
+    private appRef: ApplicationRef,
+    private router: Router) {
   }
 
   ngOnInit(): void {
@@ -126,5 +128,18 @@ export class AddHomePage implements OnInit {
     } finally {
       event.target.complete();
     }
+  }
+
+  navigateToHome(): void {
+    this.router.navigate(['landing']);
+  }
+  navigateToExplore(): void {
+    this.router.navigate(['explore']);
+  }
+  navigateToSelf(): void{
+    this.router.navigate(['self']);
+  }
+  navigateToFooterMore(): void{
+    this.router.navigate(['footer-more']);
   }
 }

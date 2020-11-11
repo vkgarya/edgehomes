@@ -18,15 +18,15 @@
             <ion-row class="center-align width-90">
                 <ion-col>
                     <h3 class="profile-header">Agent</h3>
-                    <a class="profile-link">{{owner.agentName}}</a>
+                    <a [routerLink]="['/profile']" class="profile-link">{{owner.agentName}}</a>
                 </ion-col>
                 <ion-col>
                     <h3 class="profile-header">Designer</h3>
-                    <a class="profile-link">{{owner.designerName}}</a>
+                    <a [routerLink]="['/profile']" class="profile-link">{{owner.designerName}}</a>
                 </ion-col>
                 <ion-col>
                     <h3 class="profile-header">Builder</h3>
-                    <a class="profile-link">{{owner.builderName}}</a>
+                    <a [routerLink]="['/profile']" class="profile-link">{{owner.builderName}}</a>
                 </ion-col>
             </ion-row>
         </ion-item>
@@ -76,22 +76,22 @@
     <ion-toolbar>
         <ion-row class="footer-background">
             <ion-col>
-                <ion-button size="large" fill="clear">
+                <ion-button size="large" fill="clear" (click)="navigateToHome()">
                     <ion-img class="footer-img" src="./../../assets/icons/home.png"></ion-img>
                 </ion-button>
             </ion-col>
             <ion-col>
-                <ion-button size="large" fill="clear">
+                <ion-button size="large" fill="clear" (click)="navigateToExplore()">
                     <ion-img class="footer-img" src="./../../assets/icons/explore.png"></ion-img>
                 </ion-button>
             </ion-col>
             <ion-col>
-                <ion-button size="large" fill="clear">
+                <ion-button size="large" fill="clear" (click)="navigateToSelf()">
                     <ion-img class="footer-img" src="./../../assets/icons/profile.png"></ion-img>
                 </ion-button>
             </ion-col>
             <ion-col>
-                <ion-button size="large" fill="clear">
+                <ion-button size="large" fill="clear" (click)="navigateToFooterMore()">
                     <ion-img class="footer-img" src="./../../assets/icons/more.png"></ion-img>
                 </ion-button>
             </ion-col>
