@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>{{res|json}}</ion-title>
+        {{error1|json}}
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <h1>UserAllHomes</h1>
+    <div *ngFor="let userAllHome of userAllHomes">
+        {{userAllHome.name}} - {{userAllHome.id}}
+    </div>
+
+    {{error2|json}}
+    <h1>User Specific Home</h1>
+    <div *ngFor="let home of userSpecificHome">
+        {{home.name}} - {{home.id}}
+    </div>
+    {{error3|json}}
+</ion-content>

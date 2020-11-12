@@ -35,6 +35,10 @@ const routes: Routes = [
   {
     path: 'self',
     loadChildren: () => import('./self/self.module').then( m => m.SelfPageModule)
+  },
+  {
+    path: 'testapi',
+    loadChildren: () => import('./testapi/testapi.module').then( m => m.TestapiPageModule)
   }
 ];
 

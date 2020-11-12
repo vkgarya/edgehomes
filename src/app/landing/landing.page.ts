@@ -7,6 +7,7 @@ import { SwUpdate, UpdateActivatedEvent, UpdateAvailableEvent } from '@angular/s
 import { EventResponse } from '../interfaces/interfaces';
 import { UpdatesService } from '../services/updates.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DataService } from '../services/data.service';
 
 
 @Component({
@@ -22,7 +23,12 @@ export class LandingPage implements OnInit {
   menus: any;
   updates: any;
   searchTerm: string;
+
+  userAllHomes: any;
+  userSpecificHome: any
+
   constructor(private updatesService: UpdatesService,
+    private dataService: DataService,
     private nav: NavController,
     private network: Network,
     private updater: SwUpdate,
@@ -61,6 +67,12 @@ export class LandingPage implements OnInit {
         descriptionHTML: '<b>CABINATES ARE IN!</b> I just wanted to get you an update on your home. Click the message icon to let me know if you have any questions!'
       }
     ];
+
+    this.dataService.getUserAllHomes(16)
+    .subscribe((response: any) => this.userAllHomes = response?.data);
+
+    this.dataService.getUserSpecificHome(16, 17723)
+    .subscribe((response: any) => this.userSpecificHome = response?.data);
   }
 
   ngOnDestroy(): void {
@@ -172,7 +184,7 @@ export class LandingPage implements OnInit {
     this.router.navigate(['self']);
   }
   navigateToFooterMore(): void{
-    this.router.navigate(['footer-more']);
+    this.router.navigate(['testapi']);
   }
 
 }

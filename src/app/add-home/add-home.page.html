@@ -1,3 +1,6 @@
+homes- {{homes|json}}
+<hr/> error - {{error|json}}
+<hr/>
 <ion-header [translucent]="true" class="ion-no-border">
     <ion-toolbar>
         <ion-img id="header-img" src="./../../assets/icons/designed-for-life-logo.png" alt="Edge Homes"></ion-img>
@@ -28,7 +31,7 @@
             </span>
             <ion-item lines="none">
                 <ion-input type="text" class="access-code padding" placeholder=""></ion-input>
-                <ion-button class="access-code-go" size="default" fill="clear" slot="end">Go</ion-button>
+                <ion-button class="access-code-go" size="default" fill="clear" slot="end" (click)="addHome()">Go</ion-button>
             </ion-item>
         </div>
     </div>

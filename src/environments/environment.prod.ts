@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  endpoint : 'https://us-central1-ps-notify-api.cloudfunctions.net/api',
+  endpoint:'https://devbuilder.edgehomes.com/api',
+  apiToken:'If4lW5qicq7RzP2e8i6dsPaCUKyH0MKG6SpZMkm97gFYnqqDtFSn4HaYUti6'
 };

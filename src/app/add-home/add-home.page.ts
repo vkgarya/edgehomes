@@ -7,6 +7,7 @@ import { SwUpdate, UpdateActivatedEvent, UpdateAvailableEvent } from '@angular/s
 import { EventResponse } from '../interfaces/interfaces';
 import { UpdatesService } from '../services/updates.service';
 import { Router } from '@angular/router';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-add-home',
@@ -18,8 +19,11 @@ export class AddHomePage implements OnInit {
   events: EventResponse[] = [];
   subscriptions: Subscription[] = [];
   online$ = this.network.onlineChanges;
+  homes: any;
+  error: any;
 
   constructor(private updatesService: UpdatesService,
+    private dataService: DataService,
     private nav: NavController,
     private network: Network,
     private updater: SwUpdate,
@@ -35,6 +39,11 @@ export class AddHomePage implements OnInit {
     this.initUpdater();
   }
 
+  addHome(): void {
+    this.dataService.registerUserHome(16, '6mtelT')
+      .subscribe(home => this.homes.push(home), error=> this.error = error );
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
@@ -47,7 +56,7 @@ export class AddHomePage implements OnInit {
     this.nav.navigateForward(`/add-home/${response.event.id}`);
   }
 
-  initUpdater() { 
+  initUpdater() {
     // Allow the app to stabilize first, before starting polling for updates with `interval()`.
     // See https://angular.io/guide/service-worker-communications
     const updateInterval$ = interval(1000 * 60 * 1);  // 1 minute - Just for testing
@@ -60,7 +69,7 @@ export class AddHomePage implements OnInit {
       this.subscriptions.push(appStableInterval$.subscribe(() => this.checkForUpdate()));
       this.subscriptions.push(this.updater.available.subscribe(e => this.onUpdateAvailable(e)));
       this.subscriptions.push(this.updater.activated.subscribe((e) => this.onUpdateActivated(e)));
-    }  
+    }
   }
 
   async checkForUpdate() {
@@ -118,7 +127,7 @@ export class AddHomePage implements OnInit {
   async doRefresh(event) {
     try {
       const maxEvent = this.events
-        .reduce((prev, current)=> (prev.event.id > current.event.id) ? prev : current);
+        .reduce((prev, current) => (prev.event.id > current.event.id) ? prev : current);
       const maxEventId = +maxEvent.event.id + 1;
 
       const response = await this.updatesService.getById(maxEventId).toPromise();
@@ -136,10 +145,10 @@ export class AddHomePage implements OnInit {
   navigateToExplore(): void {
     this.router.navigate(['explore']);
   }
-  navigateToSelf(): void{
+  navigateToSelf(): void {
     this.router.navigate(['self']);
   }
-  navigateToFooterMore(): void{
+  navigateToFooterMore(): void {
     this.router.navigate(['footer-more']);
   }
 }
