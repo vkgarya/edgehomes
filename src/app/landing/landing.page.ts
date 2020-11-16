@@ -39,19 +39,10 @@ export class LandingPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subscriptions.push(this.updatesService.getAll().subscribe(e => this.events.push(e)));
-
-    this.initUpdater();
-
-    // this.menus = [
-    //   { title: '', image: './../../assets/dummy/add-home.png', link: '/add-home' },
-    //   { title: 'Jones Residence', image: './../../assets/dummy/dummy-image.jpg', link: '' },
-    //   { title: 'My Rental', image: './../../assets/dummy/dummy-image.jpg', link: '' },
-    //   { title: 'Townhome', image: './../../assets/dummy/dummy-image.jpg', link: '' },
-    //   { title: 'Other home', image: './../../assets/dummy/dummy-image.jpg', link: '' }
-    // ];
-
-    this.getUserAllHomes();
+    // this.subscriptions.push(this.updatesService.getAll().subscribe(e => this.events.push(e)));
+    // this.initUpdater();
+    
+   this.getUserAllHomes();
 
     this.updates = [
       {
@@ -94,7 +85,7 @@ export class LandingPage implements OnInit {
     if (homeId === '0')
       this.router.navigate(['/add-home']);
     else
-      this.router.navigate(['/home', { id: homeId }]);
+      this.router.navigate(['/home', {id:homeId}]);
   }
 
   getEvents(): EventResponse[] {

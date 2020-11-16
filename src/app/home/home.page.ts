@@ -34,7 +34,7 @@ export class HomePage {
     private alertController: AlertController,
     private appRef: ApplicationRef,
     private router: Router,
-    private activatedRoute: ActivatedRoute, ) {
+    private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -59,7 +59,9 @@ export class HomePage {
   }
 
   segmentChanged(ev: any) {
-    if (ev.detail.value === 'photos') {
+    if (ev.detail.value === 'service') {
+      this.nav.navigateForward(`/home/service`);
+    } else if (ev.detail.value === 'photos') {
       this.nav.navigateForward(`/home/photos`);
     } else if (ev.detail.value === 'design') {
       this.nav.navigateForward(`/home/design`);

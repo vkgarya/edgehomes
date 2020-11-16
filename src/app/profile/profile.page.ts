@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy, ApplicationRef } from "@angular/core";
-import { Subscription, concat, interval } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { Subscription, concat, interval, Observable } from 'rxjs';
+import { first, map } from 'rxjs/operators';
 import { NavController, ToastController, AlertController } from "@ionic/angular";
 import { Network } from "@ngx-pwa/offline";
 import { SwUpdate, UpdateActivatedEvent, UpdateAvailableEvent } from '@angular/service-worker';
 import { EventResponse } from '../interfaces/interfaces';
 import { UpdatesService } from '../services/updates.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { DataService } from '../services/data.service';
 
 
 @Component({
@@ -21,15 +22,20 @@ export class ProfilePage implements OnInit {
 
   profile: any;
 
+  profile$: Observable<any>;
+  profileId: string;
+
   searchTerm: string;
   constructor(private updatesService: UpdatesService,
+    private dataService: DataService,
     private nav: NavController,
     private network: Network,
     private updater: SwUpdate,
     private toastController: ToastController,
     private alertController: AlertController,
     private appRef: ApplicationRef,
-    private router: Router) {
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -37,19 +43,32 @@ export class ProfilePage implements OnInit {
 
     this.initUpdater();
 
+    this.profile$ = this.activatedRoute.paramMap.pipe(map(paramMap => paramMap.get('id')));
+    this.profileId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.getProfileData(this.profileId);
 
+    // this.profile =
+    // {
+    //   avatar: './../../assets/dummy/dummy-image.jpg',
+    //   name: 'John Q. Builder',
+    //   title: 'Construction Manager',
+    //   code: '901-111-1111x1111',
+    //   description: 'Home building is in my DNA. My grandpa was a home builder. My father owned a framing company, and I am honored to be able to carry on the family tradition as a Construction Manager for Edge Homes. When I am not busyt building homes, I enjoy hunting, fishing, or just sitting on a stump in the middle of the great outdoors.',
+    //   sendMessageNumber: '+1-1212121212',
+    //   sendEmailAddress: '+1-1212121212',
+    //   phoneCallNumber: '+1-1212121212',
+    // };
+  }
 
-    this.profile =
-    {
-      avatar: './../../assets/dummy/dummy-image.jpg',
-      name: 'John Q. Builder',
-      title: 'Construction Manager',
-      code: '901-111-1111x1111',
-      description: 'Home building is in my DNA. My grandpa was a home builder. My father owned a framing company, and I am honored to be able to carry on the family tradition as a Construction Manager for Edge Homes. When I am not busyt building homes, I enjoy hunting, fishing, or just sitting on a stump in the middle of the great outdoors.',
-      sendMessageNumber: '+1-1212121212',
-      sendEmailAddress: '+1-1212121212',
-      phoneCallNumber: '+1-1212121212',
-    };
+  getProfileData(profileId: string): void {
+    this.dataService.getBuyerData(profileId)
+      .subscribe(
+        (response: any) => {
+          console.log("response - profile", response);
+          this.profile = response.data;
+        },
+        error => console.log(error)
+      );
   }
 
   segmentChanged(ev: any) {

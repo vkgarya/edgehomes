@@ -35,8 +35,8 @@ export class AddHomePage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subscriptions.push(this.updatesService.getAll().subscribe(e => this.events.push(e)));
-    this.initUpdater();
+    // this.subscriptions.push(this.updatesService.getAll().subscribe(e => this.events.push(e)));
+    // this.initUpdater();
   }
 
   addHome(accessCode: string): void {

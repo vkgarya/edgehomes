@@ -1,0 +1,26 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>service</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <h1>
+    We have got you covered.
+  </h1>
+  <ion-card class="home-card">
+    <h1>
+      Service History
+    </h1>
+
+    <ion-item lines="none" class="item-background-color">
+      <ion-row class="center-align" *ngFor="let service in services">
+        <ion-label>
+          <p class="profile-name">{{profile.name}}</p>
+          <p class="profile-title">{{profile.title}}</p>
+          <p class="profile-code">{{profile.code}}</p>
+        </ion-label>
+      </ion-row>
+    </ion-item>
+  </ion-card>
+</ion-content>

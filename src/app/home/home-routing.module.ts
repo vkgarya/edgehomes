@@ -8,6 +8,10 @@ const routes: Routes = [
     component: HomePage,
     children: [
       {
+        path: 'service',
+        loadChildren: () => import('../service/service.module').then(m => m.ServicePageModule)
+      },
+      {
         path: 'photos',
         loadChildren: () => import('../photos/photos.module').then(m => m.PhotosPageModule)
       },
