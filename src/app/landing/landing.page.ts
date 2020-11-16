@@ -24,7 +24,7 @@ export class LandingPage implements OnInit {
   updates: any;
   searchTerm: string;
 
-  userAllHomes: any = [{ title: '', image: './../../assets/dummy/add-home.png', id: '/add-home' }];
+  userAllHomes: any = [{ title: '', image: './../../assets/dummy/add-home.png', id: '0' }];
   userSpecificHome: any = [];
 
   constructor(private updatesService: UpdatesService,
@@ -91,7 +91,10 @@ export class LandingPage implements OnInit {
   }
 
   navigateToUserSpecificHome(homeId: string): void {
-    this.router.navigate(['/home', { id: homeId }]);
+    if (homeId === '0')
+      this.router.navigate(['/add-home']);
+    else
+      this.router.navigate(['/home', { id: homeId }]);
   }
 
   getEvents(): EventResponse[] {

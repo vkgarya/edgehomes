@@ -20,7 +20,6 @@ export class HomePage {
   subscriptions: Subscription[] = [];
   online$ = this.network.onlineChanges;
 
-  owner: any;
   userSpecificHome:any;
   home$: Observable<any>;
   homeId: string;
@@ -46,19 +45,6 @@ export class HomePage {
     this.home$ = this.activatedRoute.paramMap.pipe(map(paramMap => paramMap.get('id')));
     this.homeId = this.activatedRoute.snapshot.paramMap.get('id');
     this.getUserSpecificHome(this.homeId);
-
-    // this.owner =
-    //   {
-    //     avatar: './../../assets/dummy/dummy-image.jpg',
-    //     ownerName: 'Jones Residence',
-    //     status: 'Under Construction',
-    //     agentId: '1',
-    //     agentName: 'Jim McMohan',
-    //     designerId: '1',
-    //     designerName: 'Serena Williams',
-    //     builderId: '1',
-    //     builderName: 'John O. Builder'
-    //   };
   }
 
   getUserSpecificHome(homeId: string): void {
@@ -73,7 +59,6 @@ export class HomePage {
   }
 
   segmentChanged(ev: any) {
-    //console.log('Segment changed', ev);
     if (ev.detail.value === 'photos') {
       this.nav.navigateForward(`/home/photos`);
     } else if (ev.detail.value === 'design') {

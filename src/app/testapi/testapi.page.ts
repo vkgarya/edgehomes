@@ -18,20 +18,20 @@ export class TestapiPage implements OnInit {
 
   ngOnInit() {
 
-    this.dataService.getUserAllHomes(16)
-      .subscribe((response: any) => this.res = response,
-        error => this.error1 = error);
+    // this.dataService.getUserAllHomes(16)
+    //   .subscribe((response: any) => this.res = response,
+    //     error => this.error1 = error);
 
 
-    this.dataService.getUserAllHomes(16)
-      .subscribe((response: any) => this.userAllHomes = response?.data,
-        error => this.error2 = error);
+    // this.dataService.getUserAllHomes(16)
+    //   .subscribe((response: any) => this.userAllHomes = response?.data,
+    //     error => this.error2 = error);
 
-    this.dataService.getUserSpecificHome(16, 17723)
-      .subscribe(
-        (response: any) => this.userSpecificHome = response?.data,
-        error => this.error3 = error
-      );
+    // this.dataService.getUserSpecificHome(16, 17723)
+    //   .subscribe(
+    //     (response: any) => this.userSpecificHome = response?.data,
+    //     error => this.error3 = error
+    //   );
   }
 
 
