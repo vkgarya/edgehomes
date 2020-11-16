@@ -13,6 +13,16 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
+  getAuthenticatedUser(){
+    let url = `${this.endpoint}/users/self/?api_token=${this.apiToken}`;
+    return this.http.get(url);
+  }
+
+  getBuyerData(userId) {
+    let url = `${this.endpoint}/buyers/${userId}/?api_token=${this.apiToken}`;
+    return this.http.get(url);
+  }
+
   getUserAllHomes(userId) {
     let url = `${this.endpoint}/buyers/${userId}/homes?api_token=${this.apiToken}`;
     return this.http.get(url);
@@ -40,6 +50,36 @@ export class DataService {
       //   catchError(
       //     this.handleError('registerUserHome', body))
       // );
+  }
+
+  getNewsFeeds(userId): Observable<any> {
+    let url = `${this.endpoint}/buyers/${userId}/news?api_token=${this.apiToken}`;
+    return this.http.get(url); 
+  }
+
+  getMessages(userId): Observable<any> {
+    let url = `${this.endpoint}/buyers/${userId}/messages?api_token=${this.apiToken}`;
+    return this.http.get(url); 
+  }
+
+  getSpecificMessages(userId, messageId): Observable<any> {
+    let url = `${this.endpoint}/buyers/${userId}/messages/${messageId}/items?api_token=${this.apiToken}`;
+    return this.http.get(url); 
+  }
+
+  getAllCustomerServices(userId): Observable<any> {
+    let url = `${this.endpoint}/buyers/${userId}/customer-service?api_token=${this.apiToken}`;
+    return this.http.get(url); 
+  }
+
+  getSpecificHomeServiceRequests(userId, homeId): Observable<any> {
+    let url = `${this.endpoint}/buyers/${userId}/homes/${homeId}/service-requests?api_token=${this.apiToken}`;
+    return this.http.get(url); 
+  }
+
+  updateSpecificHomeServiceRequests(userId, homeId): Observable<any> {
+    let url = `${this.endpoint}/buyers/${userId}/homes/${homeId}/service-requests?api_token=${this.apiToken}`;
+    return this.http.patch(url, {}); // PENDING WITH CLIENT 
   }
 
   handleError(error: HttpErrorResponse) {

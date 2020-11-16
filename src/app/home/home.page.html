@@ -2,15 +2,15 @@
     <ion-card class="home-card">
         <ion-item lines="none" class="item-background-color">
             <ion-row class="center-align">
-                <img src="{{owner.avatar}}" class="owner-avatar">
+                <img src="{{userSpecificHome.documents[0].url}}" class="home-avatar">
             </ion-row>
         </ion-item>
         <ion-item lines="none" class="item-background-color">
 
             <ion-row class="center-align">
                 <ion-label>
-                    <p class="owner-name">{{owner.ownerName}}</p>
-                    <p class="owner-status">{{owner.status}}</p>
+                    <p class="home-name">{{userSpecificHome.name}}</p>
+                    <!-- <p class="home-status">{{userSpecificHome.status}}</p> -->
                 </ion-label>
             </ion-row>
         </ion-item>
@@ -18,15 +18,15 @@
             <ion-row class="center-align width-90">
                 <ion-col>
                     <h3 class="profile-header">Agent</h3>
-                    <a [routerLink]="['/profile']" class="profile-link">{{owner.agentName}}</a>
+                    <a [routerLink]="['/profile', {id: userSpecificHome.sales_agent.id}]" class="profile-link">{{userSpecificHome.sales_agent.name}}</a>
                 </ion-col>
                 <ion-col>
                     <h3 class="profile-header">Designer</h3>
-                    <a [routerLink]="['/profile']" class="profile-link">{{owner.designerName}}</a>
+                    <a [routerLink]="['/profile', {id: userSpecificHome.designer.id}]" class="profile-link">{{userSpecificHome.designer.name}}</a>
                 </ion-col>
                 <ion-col>
                     <h3 class="profile-header">Builder</h3>
-                    <a [routerLink]="['/profile']" class="profile-link">{{owner.builderName}}</a>
+                    <a [routerLink]="['/profile', {id: userSpecificHome.designer.id}]" class="profile-link">{{userSpecificHome.designer.name}}</a>
                 </ion-col>
             </ion-row>
         </ion-item>

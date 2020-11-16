@@ -28,7 +28,7 @@
                             </a>
                         </div> -->
                         <div *ngFor="let item of userAllHomes">
-                            <a class="menu-link" [routerLink]="[item.id]">
+                            <a class="menu-link" (click)="navigateToUserSpecificHome(item.id)">
                                 <div class="flex-circle">
                                     <ion-img src="{{item.image}}"></ion-img>
                                 </div>
@@ -48,9 +48,9 @@
     </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-    <ion-refresher (ionRefresh)="doRefresh($event)">
+    <!-- <ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
+    </ion-refresher> -->
     <div>
         <ion-grid>
             <ion-row>

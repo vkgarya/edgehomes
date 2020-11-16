@@ -20,7 +20,7 @@ export class LandingPage implements OnInit {
   subscriptions: Subscription[] = [];
   online$ = this.network.onlineChanges;
 
-  menus: any;
+  // menus: any;
   updates: any;
   searchTerm: string;
 
@@ -43,13 +43,13 @@ export class LandingPage implements OnInit {
 
     this.initUpdater();
 
-    this.menus = [
-      { title: '', image: './../../assets/dummy/add-home.png', link: '/add-home' },
-      { title: 'Jones Residence', image: './../../assets/dummy/dummy-image.jpg', link: '' },
-      { title: 'My Rental', image: './../../assets/dummy/dummy-image.jpg', link: '' },
-      { title: 'Townhome', image: './../../assets/dummy/dummy-image.jpg', link: '' },
-      { title: 'Other home', image: './../../assets/dummy/dummy-image.jpg', link: '' }
-    ];
+    // this.menus = [
+    //   { title: '', image: './../../assets/dummy/add-home.png', link: '/add-home' },
+    //   { title: 'Jones Residence', image: './../../assets/dummy/dummy-image.jpg', link: '' },
+    //   { title: 'My Rental', image: './../../assets/dummy/dummy-image.jpg', link: '' },
+    //   { title: 'Townhome', image: './../../assets/dummy/dummy-image.jpg', link: '' },
+    //   { title: 'Other home', image: './../../assets/dummy/dummy-image.jpg', link: '' }
+    // ];
 
     this.getUserAllHomes();
 
@@ -90,15 +90,8 @@ export class LandingPage implements OnInit {
       );
   }
 
-  getUserSpecificHome(homeId: string): void {
-    this.dataService.getUserSpecificHome(16, homeId)
-      .subscribe(
-        (response: any) => {
-          console.log("response", response);
-          this.userSpecificHome = [...response.data];
-        },
-        error => console.log(error)
-      );
+  navigateToUserSpecificHome(homeId: string): void {
+    this.router.navigate(['/home', { id: homeId }]);
   }
 
   getEvents(): EventResponse[] {

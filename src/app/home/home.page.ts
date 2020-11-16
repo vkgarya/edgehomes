@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy, ApplicationRef } from "@angular/core";
-import { Subscription, concat, interval } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { Subscription, concat, interval, Observable } from 'rxjs';
+import { first, switchMap, map } from 'rxjs/operators';
 import { NavController, ToastController, AlertController } from "@ionic/angular";
 import { Network } from "@ngx-pwa/offline";
 import { SwUpdate, UpdateActivatedEvent, UpdateAvailableEvent } from '@angular/service-worker';
 import { EventResponse } from '../interfaces/interfaces';
 import { UpdatesService } from '../services/updates.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { DataService } from '../services/data.service';
 
 
 @Component({
@@ -20,16 +21,21 @@ export class HomePage {
   online$ = this.network.onlineChanges;
 
   owner: any;
+  userSpecificHome:any;
+  home$: Observable<any>;
+  homeId: string;
 
   searchTerm: string;
   constructor(private updatesService: UpdatesService,
+    private dataService: DataService,
     private nav: NavController,
     private network: Network,
     private updater: SwUpdate,
     private toastController: ToastController,
     private alertController: AlertController,
     private appRef: ApplicationRef,
-    private router: Router) {
+    private router: Router,
+    private activatedRoute: ActivatedRoute, ) {
   }
 
   ngOnInit(): void {
@@ -37,20 +43,33 @@ export class HomePage {
 
     this.initUpdater();
 
+    this.home$ = this.activatedRoute.paramMap.pipe(map(paramMap => paramMap.get('id')));
+    this.homeId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.getUserSpecificHome(this.homeId);
 
+    // this.owner =
+    //   {
+    //     avatar: './../../assets/dummy/dummy-image.jpg',
+    //     ownerName: 'Jones Residence',
+    //     status: 'Under Construction',
+    //     agentId: '1',
+    //     agentName: 'Jim McMohan',
+    //     designerId: '1',
+    //     designerName: 'Serena Williams',
+    //     builderId: '1',
+    //     builderName: 'John O. Builder'
+    //   };
+  }
 
-    this.owner =
-    {
-      avatar: './../../assets/dummy/dummy-image.jpg',
-      ownerName: 'Jones Residence',
-      status: 'Under Construction',
-      agentId: '1',
-      agentName: 'Jim McMohan',
-      designerId: '1',
-      designerName: 'Serena Williams',
-      builderId: '1',
-      builderName: 'John O. Builder'
-    };
+  getUserSpecificHome(homeId: string): void {
+    this.dataService.getUserSpecificHome(16, homeId)
+      .subscribe(
+        (response: any) => {
+          console.log("response - userSpecificHome", response);
+          this.userSpecificHome = response.data;
+        },
+        error => console.log(error)
+      );
   }
 
   segmentChanged(ev: any) {
@@ -167,10 +186,10 @@ export class HomePage {
   navigateToExplore(): void {
     this.router.navigate(['explore']);
   }
-  navigateToSelf(): void{
+  navigateToSelf(): void {
     this.router.navigate(['self']);
   }
-  navigateToFooterMore(): void{
+  navigateToFooterMore(): void {
     this.router.navigate(['footer-more']);
   }
 
