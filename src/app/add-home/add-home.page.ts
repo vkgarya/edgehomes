@@ -19,7 +19,8 @@ export class AddHomePage implements OnInit {
   events: EventResponse[] = [];
   subscriptions: Subscription[] = [];
   online$ = this.network.onlineChanges;
-  homes: any;
+  homes: any = [];
+  accessCode: string;
   error: any;
 
   constructor(private updatesService: UpdatesService,
@@ -35,13 +36,18 @@ export class AddHomePage implements OnInit {
 
   ngOnInit(): void {
     this.subscriptions.push(this.updatesService.getAll().subscribe(e => this.events.push(e)));
-
     this.initUpdater();
   }
 
-  addHome(): void {
-    this.dataService.registerUserHome(16, '6mtelT')
-      .subscribe(home => this.homes.push(home), error=> this.error = error );
+  addHome(accessCode: string): void {
+    this.dataService.registerUserHome(16, accessCode)
+      .subscribe(
+        home => {
+          this.homes.push(home);
+          this.router.navigate(['/landing']);
+        },
+        error => this.error = error
+      );
   }
 
   ngOnDestroy(): void {

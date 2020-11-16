@@ -1,9 +1,8 @@
-userAllHomes: {{userAllHomes|json}}
+<!-- userAllHomes: {{userAllHomes|json}}
 <hr /> userSpecificHome: {{userSpecificHome|json}}
-<br />
+<br /> -->
 <ion-header [translucent]="true" class="ion-no-border">
     <div *ngFor="let userAllHome of userAllHomes">
-        {{userAllHome.name}} - {{userAllHome.id}}
     </div>
     <ion-toolbar>
         <ion-img id="header-img" src="./../../assets/icons/designed-for-life-logo.png" alt="Edge Homes"></ion-img>
@@ -20,12 +19,20 @@ userAllHomes: {{userAllHomes|json}}
             <div class="container-fluid">
                 <div class="w-100">
                     <div class="previews-container">
-                        <div *ngFor="let item of menus">
+                        <!-- <div *ngFor="let item of menus">
                             <a class="menu-link" [routerLink]="[item.link]">
                                 <div class="flex-circle">
                                     <ion-img src="{{item.image}}"></ion-img>
                                 </div>
                                 <ion-label class="center-align-text">{{item.title}}</ion-label>
+                            </a>
+                        </div> -->
+                        <div *ngFor="let item of userAllHomes">
+                            <a class="menu-link" [routerLink]="[item.id]">
+                                <div class="flex-circle">
+                                    <ion-img src="{{item.image}}"></ion-img>
+                                </div>
+                                <ion-label class="center-align-text">{{item.name}}</ion-label>
                             </a>
                         </div>
                     </div>

@@ -24,8 +24,8 @@ export class LandingPage implements OnInit {
   updates: any;
   searchTerm: string;
 
-  userAllHomes: any;
-  userSpecificHome: any
+  userAllHomes: any = [{ title: '', image: './../../assets/dummy/add-home.png', id: '/add-home' }];
+  userSpecificHome: any = [];
 
   constructor(private updatesService: UpdatesService,
     private dataService: DataService,
@@ -51,6 +51,8 @@ export class LandingPage implements OnInit {
       { title: 'Other home', image: './../../assets/dummy/dummy-image.jpg', link: '' }
     ];
 
+    this.getUserAllHomes();
+
     this.updates = [
       {
         avatar: './../../assets/dummy/dummy-profile.png',
@@ -67,12 +69,6 @@ export class LandingPage implements OnInit {
         descriptionHTML: '<b>CABINATES ARE IN!</b> I just wanted to get you an update on your home. Click the message icon to let me know if you have any questions!'
       }
     ];
-
-    this.dataService.getUserAllHomes(16)
-    .subscribe((response: any) => this.userAllHomes = response?.data);
-
-    this.dataService.getUserSpecificHome(16, 17723)
-    .subscribe((response: any) => this.userSpecificHome = response?.data);
   }
 
   ngOnDestroy(): void {
@@ -81,6 +77,28 @@ export class LandingPage implements OnInit {
 
   setFilteredUpdates(): void {
 
+  }
+
+  getUserAllHomes(): void {
+    this.dataService.getUserAllHomes(16)
+      .subscribe(
+        (response: any) => {
+          console.log("response", response);
+          this.userAllHomes = [...this.userAllHomes, ...response.data];
+        },
+        error => console.log(error)
+      );
+  }
+
+  getUserSpecificHome(homeId: string): void {
+    this.dataService.getUserSpecificHome(16, homeId)
+      .subscribe(
+        (response: any) => {
+          console.log("response", response);
+          this.userSpecificHome = [...response.data];
+        },
+        error => console.log(error)
+      );
   }
 
   getEvents(): EventResponse[] {
@@ -180,10 +198,10 @@ export class LandingPage implements OnInit {
   navigateToExplore(): void {
     this.router.navigate(['explore']);
   }
-  navigateToSelf(): void{
+  navigateToSelf(): void {
     this.router.navigate(['self']);
   }
-  navigateToFooterMore(): void{
+  navigateToFooterMore(): void {
     this.router.navigate(['testapi']);
   }
 
